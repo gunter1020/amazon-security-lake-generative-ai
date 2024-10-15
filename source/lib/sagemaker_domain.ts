@@ -288,10 +288,10 @@ export class SageMakerDomainStack extends Stack {
 
     // IAM Role for SageMaker user profiles
     const sagemaker_user_profile_role = new iam.Role(this, "sagemaker_user_profile_role", {
-      assumedBy: [
+      assumedBy: new iam.CompositePrincipal(
         new iam.ServicePrincipal("sagemaker.amazonaws.com"),
-        new iam.ServicePrincipal("bedrock.amazonaws.com"),
-    ],
+        new iam.ServicePrincipal("bedrock.amazonaws.com")
+      ),
       roleName: "sagemaker-user-profile-for-security-lake",
       managedPolicies: [
       ]
